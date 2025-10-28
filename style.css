@@ -1,0 +1,249 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lexend Deca', sans-serif;
+  overflow: hidden;
+  transition: background 0.5s;
+}
+
+/* ========== BUILD SOC NAVIGATION BAR ========== */
+nav {
+  position: fixed;
+  top: 25px; /* ✅ Adds space from top */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1300px;
+  height: 60px;
+  background: #f5f523;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Left section with icons */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon {
+  height: 25px;
+  width: 25px;
+  object-fit: contain;
+}
+
+.nav-symbol {
+  font-weight: bold;
+  font-size: 1rem;
+  color: black;
+}
+
+/* Menu aligned to the far right */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 35px;
+  margin-left: auto; /* ✅ pushes the menu fully to right */
+  margin-right: 50px; /* ✅ adds space before the toggle icon */
+  padding: 0;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+/* Active (highlighted link) */
+.nav-menu li a.active {
+  background: black;
+  color: #f5f523;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Hover effect */
+.nav-menu li a:hover {
+  background: black;
+  color: #f5f523;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Day/Night Toggle */
+.toggle-mode {
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+.toggle-mode:hover {
+  transform: rotate(20deg);
+}
+
+/* Dark Mode Navbar */
+body.dark nav {
+  background: #222;
+  color: #f5f523;
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.15);
+}
+
+body.dark .nav-menu li a {
+  color: #f5f523;
+}
+
+body.dark .nav-menu li a.active {
+  background: #f5f523;
+  color: black;
+}
+
+body.dark .nav-symbol {
+  color: #f5f523;
+}
+
+/* ======== DARK MODE REFINEMENTS ======== */
+
+/* 1️⃣ Grid icons become white */
+body.dark .nav-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* 2️⃣ Hover + active colors use grey instead of black */
+body.dark .nav-menu li a:hover {
+  background: #555;
+  color: #f5f523;
+}
+
+body.dark .nav-menu li a.active {
+  background: #555;
+  color: #f5f523;
+}
+
+/* 3️⃣ Dark mode logo already swapped via JS, so no extra CSS needed */
+
+
+
+/* Map Background */
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+/* ---------- HOME (Centered Logo + Responsive Text) ---------- */
+.home-viewport {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.center-content {
+  pointer-events: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Logo */
+.logo-main {
+  width: clamp(300px, 50vw, 750px); /* scales smoothly with screen size */
+  height: auto;
+  display: block;
+  animation: fadeIn 1.2s ease;
+}
+
+/* Responsive Tagline */
+.tagline {
+  margin-top: 30px;
+  font-size: clamp(0.9rem, 2vw, 1.4rem); /* auto scales text */
+  font-weight: 400;
+  color: #111;
+  letter-spacing: 0.5px;
+  animation: fadeIn 2s ease;
+  white-space: nowrap;
+}
+
+body.dark .tagline {
+  color: #f5f523;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- OVERLAY SECTIONS ---------- */
+.overlay {
+  position: absolute;
+  z-index: 2;
+  top: 80px;
+  left: 50px;
+  background: rgba(255,255,255,0.85);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  transition: all 0.3s;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Projects & Teams Grid */
+.project-grid, .team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.project-card img, .team-grid img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Contact Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form input, form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+form button {
+  background: #f5f523;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+form button:hover {
+  background: black;
+  color: #f5f523;
+}
