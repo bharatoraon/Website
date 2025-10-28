@@ -1,7 +1,8 @@
+import './style.css';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { config } from './config.js';
-
-mapboxgl.accessToken = config.MAPBOX_TOKEN;
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 // Create a clean Mapbox map
 const map = new mapboxgl.Map({
@@ -35,9 +36,9 @@ toggle.addEventListener('click', () => {
   // Change homepage logo based on mode
   const logo = document.querySelector('.logo-main');
   if (darkMode) {
-    logo.src = 'assets/buildsoc_logo_light.svg'; // ✅ your light version
+    logo.src = '/assets/buildsoc_logo_light.svg';
   } else {
-    logo.src = 'assets/buildsoc_logo.svg'; // ✅ original version
+    logo.src = '/assets/buildsoc_logo.svg';
   }
 
   // Re-clean map after reload
