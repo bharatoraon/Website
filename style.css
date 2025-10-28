@@ -2,27 +2,31 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: 'Lexend Deca', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   transition: background 0.5s;
+  width: 100%;
+  height: 100%;
 }
 
 /* ========== BUILD SOC NAVIGATION BAR ========== */
 nav {
   position: fixed;
-  top: 25px; /* ✅ Adds space from top */
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: calc(100% - 30px);
   max-width: 1300px;
-  height: 60px;
+  min-height: 60px;
   background: #f5f523;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 30px;
+  padding: 10px 20px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 /* Left section with icons */
@@ -49,10 +53,11 @@ nav {
   display: flex;
   list-style: none;
   align-items: center;
-  gap: 35px;
-  margin-left: auto; /* ✅ pushes the menu fully to right */
-  margin-right: 50px; /* ✅ adds space before the toggle icon */
+  gap: clamp(15px, 3vw, 35px);
+  margin-left: auto;
+  margin-right: 20px;
   padding: 0;
+  flex-wrap: wrap;
 }
 
 .nav-menu li a {
@@ -60,8 +65,9 @@ nav {
   color: black;
   font-weight: 700;
   font-family: 'Lexend Deca', sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.75rem, 2vw, 1rem);
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 /* Active (highlighted link) */
@@ -195,13 +201,32 @@ body.dark .tagline {
 .overlay {
   position: absolute;
   z-index: 2;
-  top: 80px;
-  left: 50px;
-  background: rgba(255,255,255,0.85);
-  padding: 30px;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: clamp(20px, 4vw, 40px);
   border-radius: 15px;
-  max-width: 400px;
+  width: calc(100% - 40px);
+  max-width: 800px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
   transition: all 0.3s;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .overlay {
+  background: rgba(34, 34, 34, 0.95);
+  color: #f5f523;
+}
+
+body.dark .overlay h2,
+body.dark .overlay h3 {
+  color: #f5f523;
+}
+
+body.dark .overlay p {
+  color: #e0e0e0;
 }
 
 .hidden {
@@ -211,12 +236,42 @@ body.dark .tagline {
 /* Projects & Teams Grid */
 .project-grid, .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background: rgba(245, 245, 245, 0.5);
+  border-radius: 10px;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+body.dark .project-card {
+  background: rgba(60, 60, 60, 0.5);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.project-card p {
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  line-height: 1.5;
 }
 
 .project-card img, .team-grid img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
 }
 
@@ -224,26 +279,137 @@ body.dark .tagline {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 form input, form textarea {
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   font-family: 'Lexend Deca', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+form input:focus, form textarea:focus {
+  outline: none;
+  border-color: #f5f523;
+}
+
+body.dark form input,
+body.dark form textarea {
+  background: rgba(60, 60, 60, 0.8);
+  border-color: #555;
+  color: #fff;
+}
+
+form textarea {
+  min-height: 120px;
+  resize: vertical;
 }
 
 form button {
   background: #f5f523;
   border: none;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  transition: all 0.3s;
 }
 
 form button:hover {
   background: black;
   color: #f5f523;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Typography Improvements */
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Mobile Navigation Improvements */
+@media (max-width: 768px) {
+  nav {
+    top: 10px;
+    width: calc(100% - 20px);
+    padding: 10px 15px;
+  }
+
+  .nav-left {
+    gap: 8px;
+  }
+
+  .nav-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  .nav-menu {
+    width: 100%;
+    justify-content: center;
+    margin: 10px 0 0 0;
+    gap: 15px;
+  }
+
+  .toggle-mode {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+
+  .overlay {
+    top: 90px;
+    width: calc(100% - 30px);
+    max-height: calc(100vh - 120px);
+    padding: 20px;
+  }
+
+  .logo-main {
+    width: 80vw;
+    max-width: 400px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-menu li a {
+    font-size: 0.7rem;
+    padding: 4px 8px !important;
+  }
+
+  .nav-menu li a.active,
+  .nav-menu li a:hover {
+    padding: 4px 8px !important;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .overlay {
+    top: 100px;
+  }
 }
